@@ -77,7 +77,7 @@ export function handleSubscriptions<
     ) {
       const authorized =
         typeof isPublishAuthorized === "function"
-          ? await isPublishAuthorized(request.clone(), env, executionCtx)
+          ? await isPublishAuthorized(request.clone() as any, env, executionCtx)
           : true;
       if (!authorized) return new Response("unauthorized", { status: 400 });
 
@@ -103,7 +103,7 @@ export function handleSubscriptions<
 
       const authorized =
         typeof isConnectAuthorized === "function"
-          ? await isConnectAuthorized(request.clone(), env, executionCtx)
+          ? await isConnectAuthorized(request.clone() as any, env, executionCtx)
           : true;
       if (!authorized) return new Response("unauthorized", { status: 400 });
 

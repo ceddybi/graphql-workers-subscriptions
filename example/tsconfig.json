@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext", "DOM", "DOM.Iterable"],
+
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018", "esnext.asynciterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     "types": ["@cloudflare/workers-types"],
     "moduleResolution": "node",
     "allowJs": true,
@@ -13,7 +17,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "include": ["app/**/*"]
 }
