@@ -7,7 +7,15 @@ export type ContextPublishFn = (topic: string, payload: any) => void | Promise<v
 export type DefaultPublishableContext<Env extends {} = {}, TExecutionContext = ExecutionContext> = {
   env: Env;
   executionCtx: TExecutionContext;
-  publish: ContextPublishFn;
+  // publish: ContextPublishFn;
+  pubsub: { 
+    publish: ContextPublishFn;
+    subscribe?: any;
+  };
+  req: {
+    headers?: Record<string, string>;
+    // TODO e.t.c
+  };
 };
 
 /**
@@ -21,30 +29,39 @@ export function createDefaultPublishableContext<Env extends {} = {}, TExecutionC
   schema,
   wsConnectionPool,
   subscriptionsDb,
+  request,
 }: {
+  request: Request<unknown, IncomingRequestCfProperties<unknown> | CfProperties<unknown>>;
   env: Env;
   executionCtx: TExecutionContext
   schema: GraphQLSchema;
   wsConnectionPool: (env: Env) => DurableObjectNamespace;
   subscriptionsDb: (env: Env) => D1Database;
 }) {
+  const pubsubPublish = (topic: any, payload: any) => {
+    const publishFn = createPublishFn(
+      wsConnectionPool(env),
+      subscriptionsDb(env),
+      schema,
+      publishableCtx
+    );
+    const promise = publishFn({ topic, payload });
+
+    // this would happen inside a Durable Object
+    if (!executionCtx) return promise;
+
+    executionCtx?.waitUntil(promise);
+  }
+  
   const publishableCtx: DefaultPublishableContext<Env, TExecutionContext> = {
     env,
     executionCtx,
-    publish: (topic, payload) => {
-      const publishFn = createPublishFn(
-        wsConnectionPool(env),
-        subscriptionsDb(env),
-        schema,
-        publishableCtx
-      );
-
-      const promise = publishFn({ topic, payload });
-
-      // this would happen inside a Durable Object
-      if (!executionCtx) return promise;
-
-      executionCtx?.waitUntil(promise);
+    pubsub: { 
+      publish: pubsubPublish,
+    },
+    req: {
+      headers: Object.fromEntries(request?.headers?.entries() ?? []),
+      // TODO e.t.c
     },
   };
   return publishableCtx;

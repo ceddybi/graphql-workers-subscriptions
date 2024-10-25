@@ -1,4 +1,4 @@
-import { SubscribePayload } from "graphql-ws";
+import { SubscribePayload } from "graphql-ws2";
 
 export interface Subscription {
   id: string;

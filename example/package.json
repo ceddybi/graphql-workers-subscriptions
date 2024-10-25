@@ -2,7 +2,6 @@
   "name": "example",
   "description": "Cloudflare Workers Topic-based GraphQL Subscriptions demo app",
   "version": "0.0.2",
-  "type": "module",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -14,19 +13,29 @@
   "dependencies": {
     "@graphql-tools/schema": "^10.0.6",
     "@graphql-yoga/subscription": "^5.0.1",
+    "@pothos/core": "^4.3.0",
+    "@roadmanjs/auth": "^1.1.1",
+    "@roadmanjs/chat": "^1.1.1",
+    "@roadmanjs/couchset": "^1.1.1",
+    "couchbase-serverless": "0.0.4",
+    "argon2-browser": "^1.18.0",
     "class-validator": "^0.14.1",
+    "debug": "^4.3.7",
     "graphql": "^16.9.0",
     "graphql-scalars": "^1.23.0",
-    "graphql-workers-subscriptions": "*",
+    "graphql-subscriptions": "^2.0.0",
     "graphql-yoga": "^5.7.0",
+    "lodash": "^4.17.21",
     "reflect-metadata": "^0.2.2",
-    "type-graphql": "^2.0.0-rc.2"
+    "type-graphql": "^2.0.0-rc.2",
+    "undici": "^6.20.1"
   },
   "resolutions": {
     "graphql": "^16.6.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230518.0",
+    "@types/debug": "^4.1.12",
     "esbuild": "^0.17.2",
     "esbuild-visualizer": "^0.4.0",
     "typescript": "^4.9.4",

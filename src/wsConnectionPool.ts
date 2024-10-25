@@ -1,5 +1,5 @@
 import { GraphQLSchema } from "graphql";
-import { handleProtocols } from "graphql-ws";
+import { handleProtocols } from "graphql-ws2";
 import * as db from "./db";
 import { resolveSubscription } from "./resolveSubscription";
 import { createDefaultPublishableContext } from "./publishableContext";
@@ -20,6 +20,7 @@ export function createWsConnectionPoolClass<
   wsConnectionPool,
   context: createContext = (req, env) =>
     createDefaultPublishableContext<Env, undefined>({
+      request: req,
       env,
       executionCtx: undefined,
       subscriptionsDb,

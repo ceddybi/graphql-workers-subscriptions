@@ -1,6 +1,6 @@
 import { IFieldResolver } from "@graphql-tools/utils";
 import { GraphQLResolveInfo } from "graphql";
-import { ServerOptions } from "graphql-ws";
+import { ServerOptions } from "graphql-ws2";
 import type { WebSocket } from "@cloudflare/workers-types";
 
 export type MaybePromise<T> = T | Promise<T>;

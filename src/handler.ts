@@ -17,6 +17,7 @@ export function handleSubscriptions<
   isConnectAuthorized,
   context: createContext = (request, env, executionCtx, requestBody) =>
     createDefaultPublishableContext({
+      request,
       env,
       executionCtx,
       schema,

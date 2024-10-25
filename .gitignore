@@ -24,3 +24,5 @@ example/.yarn/*
 !example/.yarn/sdks
 !example/.yarn/versions
 
+wrangler.toml
+

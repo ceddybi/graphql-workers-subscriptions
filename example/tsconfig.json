@@ -15,7 +15,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "argon2": ["argon2-browser"]
     },
     "resolveJsonModule": true,
   },

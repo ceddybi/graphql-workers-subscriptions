@@ -1,6 +1,6 @@
 import { Subscription } from "./subscription";
 import { GraphQLSchema, parse, execute } from "graphql";
-import { MessageType, NextMessage } from "graphql-ws";
+import { MessageType, NextMessage } from "graphql-ws2";
 import { group } from "radash"
 import * as db from "./db";
 import { log } from "./log";

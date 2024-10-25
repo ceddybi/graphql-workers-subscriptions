@@ -6,7 +6,7 @@ import {
 } from "./graphqlInternals";
 import { getResolverAndArgs } from "./getResolverAndArgs";
 import { GraphQLSchema } from "graphql";
-import { SubscribeMessage } from "graphql-ws";
+import { SubscribeMessage } from "graphql-ws2";
 import { Subscription } from "./subscription";
 
 export const resolveSubscription = async (

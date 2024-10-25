@@ -4,7 +4,7 @@ import {
   MessageType,
   stringifyMessage,
   SubscribeMessage,
-} from "graphql-ws";
+} from "graphql-ws2";
 import type { WebSocket } from "@cloudflare/workers-types";
 import { log } from "./log";
 import { GraphQLWsServerOptions } from "./types";
