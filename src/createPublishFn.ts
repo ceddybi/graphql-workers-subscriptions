@@ -18,21 +18,21 @@ export const createPublishFn =
     schema: GraphQLSchema,
     graphqlContext: any
   ): PublishFn =>
-  async (event: { topic: string; payload?: any }) => {
-    const subscriptions = await db.querySubscriptions(
-      SUBSCRIPTIONS_DB,
-      event.topic,
-      event.payload
-    );
+    async (event: { topic: string; payload?: any }) => {
+      const subscriptions = await db.querySubscriptions(
+        SUBSCRIPTIONS_DB,
+        event.topic,
+        event.payload
+      );
 
-    await publishToConnections(
-      subscriptions,
-      WS_CONNECTION_POOL,
-      schema,
-      event.payload,
-      graphqlContext
-    );
-  };
+      await publishToConnections(
+        subscriptions,
+        WS_CONNECTION_POOL,
+        schema,
+        event.payload,
+        graphqlContext
+      );
+    };
 
 async function publishToConnections(
   subscriptions: Subscription[],
@@ -72,7 +72,7 @@ async function publishToConnections(
           const message: NextMessage = {
             id: sub.id,
             type: MessageType.Next,
-            payload,
+            payload: payload?.data ? payload : { data: { data: payload } },
           };
 
           return { message, connectionId: sub.connectionId };
