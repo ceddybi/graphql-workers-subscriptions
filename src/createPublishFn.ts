@@ -59,20 +59,20 @@ async function publishToConnections(
         subscriptions!.map(async (sub) => {
           // execution of subscription with payload as the root (can be modified within the resolve callback defined in schema)
           // will return the payload as is by default
-          const payload = await execute({
-            schema: schema,
-            document: parse(sub.subscription.query),
-            rootValue: eventPayload,
-            contextValue: graphqlContext,
-            variableValues: sub.subscription.variables,
-            operationName: sub.subscription.operationName,
-          });
+          // const payload = await execute({
+          //   schema: schema,
+          //   document: parse(sub.subscription.query),
+          //   rootValue: eventPayload,
+          //   contextValue: graphqlContext,
+          //   variableValues: sub.subscription.variables,
+          //   operationName: sub.subscription.operationName,
+          // });
 
           // transform it into ws message (id is not specific to connection but to subscription)
           const message: NextMessage = {
             id: sub.id,
             type: MessageType.Next,
-            payload: payload?.data ? payload : { data: { data: payload } },
+            payload: { data: { data: eventPayload } },
           };
 
           return { message, connectionId: sub.connectionId };
